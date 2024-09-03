@@ -5,12 +5,14 @@ import { MdShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
     return (
-        <div className='flex flex-col md:flex-row justify-between md:justify-between items-center px-2'>
+        <div className='flex flex-col md:flex-row justify-between md:justify-between items-center px-2 shadow-md'>
             <div className="logo mx-5">
-                <Image src='/Logo.png' alt='' height={60} width={60} />
+                <Link href='/'>
+                    <Image src='/Logo.png' alt='' height={60} width={60} />
+                </Link>
             </div>
             <div className="nav">
-                <ul className='flex item-center space-x-2 font-bold md:text-xl'>
+                <ul className='flex item-center space-x-6 font-bold md:text-md'>
                     <Link href='/tshirts'>
                         <li>Tshirts</li>
                     </Link>
