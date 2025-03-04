@@ -5,7 +5,7 @@ import { MdShoppingCart } from "react-icons/md";
 import { IoClose, IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
-const Navbar = () => {
+const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
     const ref = useRef()
 
@@ -56,62 +56,29 @@ const Navbar = () => {
                     <IoClose />
                 </span>
                 <ol className="list-decimal font-semibold">
-                    <li>
-                        <div className="item flex my-5">
-                            <div className="w-2/3 font-semibold">TShirts - Wear the code</div>
-                            <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
-                                <AiOutlineMinusCircle className="cursor-pointer" />
-                                <span className="mx-2 text-sm">1</span>
-                                <AiOutlinePlusCircle className="cursor-pointer" />
+                    {Object.keys(cart).length === 0 && (
+                        <div className="my-4 font-semibold">Your cart is Empty!</div>
+                    )}
+                    {Object.keys(cart)?.map((item, index) => (
+                        <li key={index}>
+                            <div className="item flex my-5">
+                                <div className="w-2/3 font-semibold">{cart[item].name}</div>
+                                <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
+                                    <AiOutlineMinusCircle className="cursor-pointer" />
+                                    <span className="mx-2 text-sm">{cart[item].qty}</span>
+                                    <AiOutlinePlusCircle className="cursor-pointer" />
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="item flex my-5">
-                            <div className="w-2/3 font-semibold">TShirts - Wear the code</div>
-                            <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
-                                <AiOutlineMinusCircle className="cursor-pointer" />
-                                <span className="mx-2 text-sm">1</span>
-                                <AiOutlinePlusCircle className="cursor-pointer" />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="item flex my-5">
-                            <div className="w-2/3 font-semibold">TShirts - Wear the code</div>
-                            <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
-                                <AiOutlineMinusCircle className="cursor-pointer" />
-                                <span className="mx-2 text-sm">1</span>
-                                <AiOutlinePlusCircle className="cursor-pointer" />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="item flex my-5">
-                            <div className="w-2/3 font-semibold">TShirts - Wear the code</div>
-                            <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
-                                <AiOutlineMinusCircle className="cursor-pointer" />
-                                <span className="mx-2 text-sm">1</span>
-                                <AiOutlinePlusCircle className="cursor-pointer" />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="item flex my-5">
-                            <div className="w-2/3 font-semibold">TShirts - Wear the code</div>
-                            <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
-                                <AiOutlineMinusCircle className="cursor-pointer" />
-                                <span className="mx-2 text-sm">1</span>
-                                <AiOutlinePlusCircle className="cursor-pointer" />
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    ))}
                 </ol>
                 <div className="flex">
                     <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
                         <IoBagCheck className='m-1' />Checkout
                     </button>
-                    <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm text-nowrap">
+                    <button
+                        className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm text-nowrap"
+                        onClick={clearCart}>
                         Clear Cart
                     </button>
                 </div>
