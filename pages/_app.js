@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }) {
   const [subTotal, setSubTotal] = useState(0)
 
   const saveCart = (myCart) => {
-    localStorage.setItem("cart", myCart)
+    localStorage.setItem("cart", JSON.stringify(myCart))
     let subT = 0
     let keys = Object.keys(myCart)
     for (let i = 0; i < keys.length; i++) {
