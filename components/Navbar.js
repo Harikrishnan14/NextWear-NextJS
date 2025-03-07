@@ -72,6 +72,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                         </li>
                     ))}
                 </ol>
+                <div className="font-bold my-2">Subtoal: ₹{subTotal}</div>
                 <div className="flex">
                     <Link href={'/checkout'}>
                         <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
