@@ -96,6 +96,7 @@ const Slug = ({ addToCart, variants, product }) => {
                                     <div className="relative">
                                         <select
                                             onChange={(e) => refreshVariants(color, e.target.value)}
+                                            value={size}
                                             className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
                                         >
                                             {Object.keys(variants[color]).includes('S') && <option className="S">S</option>}
