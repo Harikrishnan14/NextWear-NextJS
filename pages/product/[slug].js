@@ -41,7 +41,7 @@ const Slug = ({ addToCart, variants, product }) => {
                         <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto p-24 object-cover object-top rounded" src="https://c.media-amazon.com/images/I/71Z49bHbAiL._SY741_.jpg" />
                         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">NEXTWEAR</h2>
-                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">Wear the code (XL/Black)</h1>
+                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title} ({product.size}/{product.color})</h1>
                             <div className="flex mb-4">
                                 <span className="flex items-center">
                                     <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ const Slug = ({ addToCart, variants, product }) => {
                                     </a>
                                 </span>
                             </div>
-                            <p className="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
+                            <p className="leading-relaxed">{product.desc}</p>
                             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                                 <div className="flex">
                                     <span className="mr-3">Color</span>
