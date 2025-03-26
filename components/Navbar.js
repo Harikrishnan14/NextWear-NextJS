@@ -64,7 +64,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                     {Object.keys(cart)?.map((item, index) => (
                         <li key={index}>
                             <div className="item flex my-5">
-                                <div className="w-2/3 font-semibold">{cart[item].name}</div>
+                                <div className="w-2/3 font-semibold">{cart[item].name}({cart[item].size}/{cart[item].variant})</div>
                                 <div className="flex items-center justify-center w-1/3 font-semibold text-lg">
                                     <AiOutlineMinusCircle className="cursor-pointer" onClick={() => removeFromCart(item, 1, cart[item].price, cart[item].name, cart[item].size, cart[item].variant)} />
                                     <span className="mx-2 text-sm">{cart[item].qty}</span>

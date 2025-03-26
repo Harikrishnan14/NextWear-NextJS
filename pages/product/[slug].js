@@ -121,7 +121,7 @@ const Slug = ({ addToCart, variants, product }) => {
                                 <button
                                     className="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded"
                                     onClick={() => {
-                                        addToCart(slug, 1, 499, 'Wear the Code(XL, Black)', 'XL', 'Black')
+                                        addToCart(slug, 1, 499, product.title, product.size, product.color)
                                     }}
                                 >
                                     Add to Cart
