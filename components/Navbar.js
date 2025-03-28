@@ -30,16 +30,16 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             </div>
             <div className="nav">
                 <ul className='flex item-center space-x-6 font-bold md:text-md'>
-                    <Link href='/tshirts'>
+                    <Link href='/tshirts' className='hover:text-indigo-600'>
                         <li>Tshirts</li>
                     </Link>
-                    <Link href='/hoodies'>
+                    <Link href='/hoodies' className='hover:text-indigo-600'>
                         <li>Hoodies</li>
                     </Link>
-                    <Link href='/stickers'>
+                    <Link href='/stickers' className='hover:text-indigo-600'>
                         <li>Stickers</li>
                     </Link>
-                    <Link href='/mugs'>
+                    <Link href='/mugs' className='hover:text-indigo-600'>
                         <li>Mugs</li>
                     </Link>
                 </ul>
