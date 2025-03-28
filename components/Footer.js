@@ -14,23 +14,25 @@ const Footer = () => {
                         <Image src="/Logo.png" alt="" height={75} width={75} />
                         <span className="ml-3 text-xl">NextWear</span>
                     </Link>
-                    <p className="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+                    <p className="mt-2 text-sm text-gray-500">Wear the &lt;code/&gt;
+                        <span className="text-sm text-gray-500">Premium coding tshirts, hoodies and apparels</span>
+                    </p>
                 </div>
                 <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">SHOP</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">First Link</a>
+                                <Link href={"/tshirt"} className="text-gray-600 hover:text-gray-800">TShirts</Link>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                                <Link href={"/hoodies"} className="text-gray-600 hover:text-gray-800">Hoodies</Link>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                                <Link href={"/stickers"} className="text-gray-600 hover:text-gray-800">Stickers</Link>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                                <Link href={"/mugs"} className="text-gray-600 hover:text-gray-800">Mugs</Link>
                             </li>
                         </nav>
                     </div>
@@ -52,7 +54,7 @@ const Footer = () => {
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">POLICY</h2>
                         <nav className="list-none mb-10">
                             <li>
                                 <a className="text-gray-600 hover:text-gray-800">First Link</a>
@@ -69,7 +71,7 @@ const Footer = () => {
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">ABOUT</h2>
                         <nav className="list-none mb-10">
                             <li>
                                 <a className="text-gray-600 hover:text-gray-800">First Link</a>
@@ -89,9 +91,7 @@ const Footer = () => {
             </div>
             <div className="bg-gray-100">
                 <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-                    <p className="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
-                        <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@knyttneve</a>
-                    </p>
+                    <p className="text-gray-500 text-sm text-center sm:text-left">© 2025 NextWear.com - All Rights Reserved</p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                         <a className="text-gray-500">
                             <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
