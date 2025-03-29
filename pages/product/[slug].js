@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import mongoose from "mongoose";
 
-const Slug = ({ addToCart, variants, product }) => {
+const Slug = ({ addToCart, clearCart, variants, product }) => {
     const router = useRouter()
     const { slug } = router.query
     const [pin, setPin] = useState()
@@ -30,8 +30,11 @@ const Slug = ({ addToCart, variants, product }) => {
         window.location = url
     }
 
-    console.log("var", variants);
-    console.log("pro", product);
+    const buyNow = () => {
+        clearCart()
+        addToCart(slug, 1, 499, product.title, product.size, product.color)
+        router.push('/checkout')
+    }
 
     return (
         <>
@@ -117,7 +120,7 @@ const Slug = ({ addToCart, variants, product }) => {
                             </div>
                             <div className="flex">
                                 <span className="title-font font-medium text-2xl text-gray-900">₹499</span>
-                                <button className="flex ml-8 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded">Buy Now</button>
+                                <button className="flex ml-8 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded" onClick={() => buyNow()}>Buy Now</button>
                                 <button
                                     className="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded"
                                     onClick={() => {
