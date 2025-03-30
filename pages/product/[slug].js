@@ -2,6 +2,7 @@ import Product from "@/models/Product"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import mongoose from "mongoose";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 
 const Slug = ({ addToCart, buyNow, variants, product }) => {
     const router = useRouter()
@@ -16,8 +17,30 @@ const Slug = ({ addToCart, buyNow, variants, product }) => {
         let pinJson = await pins.json()
         if (pinJson.includes(parseInt(pin))) {
             setAvailable(true)
+            toast.success('Your Pincode is serviceable!', {
+                position: "bottom-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         } else {
             setAvailable(false)
+            toast.error('Sorry, Pincode not serviceable!', {
+                position: "bottom-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         }
     }
 
@@ -33,6 +56,21 @@ const Slug = ({ addToCart, buyNow, variants, product }) => {
     return (
         <>
             <section className="text-gray-600 body-font overflow-hidden">
+                <div>
+                    <ToastContainer
+                        position="bottom-center"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover={false}
+                        theme="dark"
+                        transition={Bounce}
+                    />
+                </div>
                 <div className="container px-5 py-16 mx-auto">
                     <div className="lg:w-4/5 mx-auto flex flex-wrap">
                         <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto p-24 object-cover object-top rounded" src={product.img} />
