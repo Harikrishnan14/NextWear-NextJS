@@ -151,12 +151,12 @@ const Slug = ({ addToCart, buyNow, variants, product }) => {
                                 </div>
                             </div>
                             <div className="flex">
-                                <span className="title-font font-medium text-2xl text-gray-900">₹499</span>
-                                <button className="flex ml-8 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded" onClick={() => buyNow(slug, 1, 499, product.title, product.size, product.color)}>Buy Now</button>
+                                <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
+                                <button className="flex ml-8 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded" onClick={() => buyNow(slug, 1, product.price, product.title, product.size, product.color)}>Buy Now</button>
                                 <button
                                     className="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded"
                                     onClick={() => {
-                                        addToCart(slug, 1, 499, product.title, product.size, product.color)
+                                        addToCart(slug, 1, product.price, product.title, product.size, product.color)
                                     }}
                                 >
                                     Add to Cart
