@@ -7,7 +7,7 @@ const handler = async (req, res) => {
         await user.save()
         res.status(200).json({ success: "Success" })
     } else {
-        res.status(400).json({ error: "This method is not allowed" })
+        res.status(400).json({ error: "This method is not allowed." })
     }
 }
 
