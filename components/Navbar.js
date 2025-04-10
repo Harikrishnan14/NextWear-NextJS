@@ -6,7 +6,7 @@ import { IoClose, IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { MdAccountCircle } from "react-icons/md";
 
-const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
     const ref = useRef()
 
@@ -23,7 +23,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
     return (
         <div className='flex flex-col md:flex-row justify-between md:justify-between items-center px-2 shadow-md sticky top-0 bg-white z-10'>
-            <div className="logo mx-5">
+            <div className="logo mr-auto md:mx-5">
                 <Link href='/'>
                     <Image src='/Logo.png' alt='' height={60} width={60} />
                 </Link>
@@ -45,10 +45,13 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                 </ul>
             </div>
             <div>
-                <div className="cursor-pointer cart absolute right-0 top-4 mx-5 flex">
-                    <Link href='/login'>
-                        <MdAccountCircle className='text-xl md:text-3xl me-3' />
-                    </Link>
+                <div className="cursor-pointer cart absolute right-0 top-4 mx-5 flex items-center">
+                    {user.value && <MdAccountCircle className='text-xl md:text-3xl me-3' />}
+                    {!user.value && (
+                        <Link href='/login'>
+                            <button className='bg-indigo-600 px-2 py-1 rounded-md text-sm text-white mx-2'>Login</button>
+                        </Link>
+                    )}
                     <MdShoppingCart className='text-xl md:text-3xl' onClick={toggleCart} />
                 </div>
             </div>

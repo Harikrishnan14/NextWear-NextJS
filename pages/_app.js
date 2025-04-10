@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
+  const [user, setUser] = useState({ value: null })
+  const [key, setKey] = useState(0)
 
   const router = useRouter()
 
@@ -65,11 +67,17 @@ export default function App({ Component, pageProps }) {
       console.error(error)
       localStorage.clear()
     }
-  }, [])
+
+    const token = localStorage.getItem('token')
+    if (localStorage.getItem(token)) {
+      setUser({ value: token })
+      setKey(Map.random())
+    }
+  }, [router.query])
 
 
   return <>
-    <Navbar key={subTotal} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+    <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
     <Component cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} buyNow={buyNow} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
     <Footer />
   </>
