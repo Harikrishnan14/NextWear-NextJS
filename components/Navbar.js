@@ -21,6 +21,11 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal }) 
         }
     }
 
+    const logout = () => {
+        localStorage.clear()
+        window.location.reload()
+    }
+
     return (
         <div className='flex flex-col md:flex-row justify-between md:justify-between items-center px-2 shadow-md sticky top-0 bg-white z-10'>
             <div className="logo mr-auto md:mx-5">
