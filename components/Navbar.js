@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdShoppingCart } from "react-icons/md";
 import { IoClose, IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { MdAccountCircle } from "react-icons/md";
 
-const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, logout }) => {
 
+    const [dropdown, setDropdown] = useState(false)
     const ref = useRef()
 
     const toggleCart = () => {
@@ -19,11 +20,6 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal }) 
             ref.current.classList.remove('translate-x-0')
             ref.current.classList.add('translate-x-full')
         }
-    }
-
-    const logout = () => {
-        localStorage.clear()
-        window.location.reload()
     }
 
     return (
@@ -51,7 +47,20 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal }) 
             </div>
             <div>
                 <div className="cursor-pointer cart absolute right-0 top-4 mx-5 flex items-center">
-                    {user.value && <MdAccountCircle className='text-xl md:text-3xl me-3' />}
+                    <a onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+                        {dropdown && <div className="absolute right-5 top-6 py-2 w-32 bg-indigo-300 rounded-md px-5" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+                            <ul>
+                                <Link href='/myaccount'>
+                                    <li className='py-1 text-sm font-medium hover:text-indigo-700'>My Account</li>
+                                </Link>
+                                <Link href='/orders'>
+                                    <li className='py-1 text-sm font-medium hover:text-indigo-700'>Orders</li>
+                                </Link>
+                                <li className='py-1 text-sm font-medium hover:text-indigo-700' onClick={logout}>Logout</li>
+                            </ul>
+                        </div>}
+                        {user.value && <MdAccountCircle className='text-xl md:text-3xl me-3' />}
+                    </a>
                     {!user.value && (
                         <Link href='/login'>
                             <button className='bg-indigo-600 px-2 py-1 rounded-md text-sm text-white mx-2'>Login</button>

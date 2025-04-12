@@ -57,6 +57,12 @@ export default function App({ Component, pageProps }) {
     saveCart({})
   }
 
+  const logout = () => {
+    localStorage.removeItem('token')
+    setUser({ value: null })
+    setKey(Math.random())
+  }
+
   useEffect(() => {
     try {
       if (localStorage.getItem("cart")) {
@@ -69,15 +75,15 @@ export default function App({ Component, pageProps }) {
     }
 
     const token = localStorage.getItem('token')
-    if (localStorage.getItem(token)) {
+    if (token) {
       setUser({ value: token })
-      setKey(Map.random())
+      setKey(Math.random())
     }
   }, [router.query])
 
 
   return <>
-    <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+    <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} logout={logout} />
     <Component cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} buyNow={buyNow} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
     <Footer />
   </>
