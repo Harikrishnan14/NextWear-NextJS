@@ -51,12 +51,12 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
                         {dropdown && <div className="absolute right-5 top-6 py-2 w-32 bg-indigo-300 rounded-md px-5" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
                             <ul>
                                 <Link href='/myaccount'>
-                                    <li className='py-1 text-sm font-medium hover:text-indigo-700'>My Account</li>
+                                    <li className='py-1 text-sm font-bold hover:text-indigo-700'>My Account</li>
                                 </Link>
                                 <Link href='/orders'>
-                                    <li className='py-1 text-sm font-medium hover:text-indigo-700'>Orders</li>
+                                    <li className='py-1 text-sm font-bold hover:text-indigo-700'>Orders</li>
                                 </Link>
-                                <li className='py-1 text-sm font-medium hover:text-indigo-700' onClick={logout}>Logout</li>
+                                <li className='py-1 text-sm font-bold hover:text-indigo-700' onClick={logout}>Logout</li>
                             </ul>
                         </div>}
                         {user.value && <MdAccountCircle className='text-xl md:text-3xl me-3' />}
