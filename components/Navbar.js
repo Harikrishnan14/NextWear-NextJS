@@ -48,7 +48,7 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
             <div>
                 <div className="cursor-pointer cart absolute right-0 top-4 mx-5 flex items-center">
                     <a onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
-                        {dropdown && <div className="absolute right-5 top-6 py-2 w-32 bg-indigo-300 rounded-md px-5" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+                        {dropdown && <div className="absolute right-5 top-6 py-2 w-32 bg-white shadow-lg border rounded-md px-5" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
                             <ul>
                                 <Link href='/myaccount'>
                                     <li className='py-1 text-sm font-bold hover:text-indigo-700'>My Account</li>
