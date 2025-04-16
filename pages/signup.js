@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Bounce, toast, ToastContainer } from 'react-toastify'
 
 const Signup = () => {
@@ -35,6 +35,12 @@ const Signup = () => {
       transition: Bounce,
     });
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/')
+    }
+  }, [])
 
   return (
     <div>
