@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Bounce, toast, ToastContainer } from 'react-toastify'
 
 const Login = () => {
@@ -52,6 +52,12 @@ const Login = () => {
       });
     }
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/')
+    }
+  }, [])
 
   return (
     <div>
