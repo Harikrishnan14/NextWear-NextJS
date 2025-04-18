@@ -1,3 +1,4 @@
+import Order from '@/models/Order'
 import React from 'react'
 
 const orders = () => {
@@ -8,7 +9,7 @@ const orders = () => {
                     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                             <div className="overflow-hidden">
-                                <h1 className='font-bold text-xl p-8'>My Orders</h1>
+                                <h1 className='text-center font-semibold text-2xl p-8'>My Orders</h1>
                                 <table
                                     className="min-w-full text-left text-sm font-light text-surface dark:text-white">
                                     <thead
@@ -48,6 +49,18 @@ const orders = () => {
             </div>
         </div >
     )
+}
+
+export async function getServerSideProps(context) {
+    if (!mongoose.connection.readyState) {
+        await mongoose.connect(process.env.MONGO_URI)
+    }
+    let orders = await Order.find({})
+    return {
+        props: {
+            orders: orders
+        }
+    };
 }
 
 export default orders
