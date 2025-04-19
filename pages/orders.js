@@ -1,5 +1,6 @@
 import Order from '@/models/Order'
 import React from 'react'
+import mongoose from "mongoose";
 
 const orders = () => {
     return (
