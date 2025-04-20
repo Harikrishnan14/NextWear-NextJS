@@ -16,34 +16,34 @@ const Order = () => {
                   className="border-b border-neutral-200 font-medium dark:border-black/10 text-black">
                   <tr>
                     <th scope="col" className="px-6 py-4">#</th>
-                    <th scope="col" className="px-6 py-4">First</th>
-                    <th scope="col" className="px-6 py-4">Last</th>
-                    <th scope="col" className="px-6 py-4">Handle</th>
+                    <th scope="col" className="px-6 py-4">Item Desc</th>
+                    <th scope="col" className="px-6 py-4">Qty</th>
+                    <th scope="col" className="px-6 py-4">Total</th>
                   </tr>
                 </thead>
                 <tbody className='text-black'>
                   <tr className="border-b border-neutral-200 dark:border-black/10">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                    <td className="whitespace-nowrap px-6 py-4">Mark</td>
-                    <td className="whitespace-nowrap px-6 py-4">Otto</td>
-                    <td className="whitespace-nowrap px-6 py-4">@mdo</td>
+                    <td className="whitespace-nowrap px-6 py-4">Hoodie</td>
+                    <td className="whitespace-nowrap px-6 py-4">2</td>
+                    <td className="whitespace-nowrap px-6 py-4">₹1,998</td>
                   </tr>
                   <tr className="border-b border-neutral-200 dark:border-black/10">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">2</td>
-                    <td className="whitespace-nowrap px-6 py-4">Jacob</td>
-                    <td className="whitespace-nowrap px-6 py-4">Thornton</td>
-                    <td className="whitespace-nowrap px-6 py-4">@fat</td>
+                    <td className="whitespace-nowrap px-6 py-4">Tshirt</td>
+                    <td className="whitespace-nowrap px-6 py-4">1</td>
+                    <td className="whitespace-nowrap px-6 py-4">₹699</td>
                   </tr>
                   <tr className="border-b border-neutral-200 dark:border-black/10">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">3</td>
-                    <td className="whitespace-nowrap px-6 py-4">Larry</td>
-                    <td className="whitespace-nowrap px-6 py-4">Wild</td>
-                    <td className="whitespace-nowrap px-6 py-4">@twitter</td>
+                    <td className="whitespace-nowrap px-6 py-4">Stickers</td>
+                    <td className="whitespace-nowrap px-6 py-4">5</td>
+                    <td className="whitespace-nowrap px-6 py-4">₹125</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <h1 className="text-gray-900 text-3xl title-font font-medium my-5">SubTotal: ₹1158.00</h1>
+            <h1 className="text-gray-900 text-3xl title-font font-medium my-5">SubTotal: ₹2,822.00</h1>
             <button className="flex text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded">Track Order</button>
           </div>
           <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400" />
