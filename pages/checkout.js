@@ -2,10 +2,59 @@ import React from 'react'
 import { IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import Link from 'next/link';
+import Head from 'next/head';
+import Script from 'next/script';
 
 const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
+
+  const InitiatePayment = async () => {
+    let txn_token;
+    let amount;
+
+    // Get a transaction token
+    const data = { cart, subTotal }
+    let a = await fetch(`${NEXT_PUBLIC_HOST}/api/pretransaction`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    let b = await a.json()
+    console.log(b);
+    
+
+    var config = {
+      "root": "",
+      "flow": "DEFAULT",
+      "data": {
+        "orderId": Math.random(), /* update order id */
+        "token": txn_token, /* update token value */
+        "tokenType": "TXN_TOKEN",
+        "amount": amount /* update amount */
+      },
+      "handler": {
+        "notifyMerchant": function (eventName, data) {
+          console.log("notifyMerchant handler function called");
+          console.log("eventName => ", eventName);
+          console.log("data => ", data);
+        }
+      }
+    };
+    window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+      // after successfully updating configuration, invoke JS Checkout
+      window.Paytm.CheckoutJS.invoke();
+    }).catch(function onError(error) {
+      console.log("error => ", error);
+    });
+  }
+
   return (
     <div className='container px-2 sm:m-auto'>
+      <Head>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+      </Head>
+      <Script type='application/javascript' crossOrigin='anonymous' src={`${process.env.PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.PAYTM_MID}.js`} onLoad="onScriptLoad();" />
       <h1 className='font-bold text-3xl my-8 text-center'>Checkout</h1>
 
       <h2 className='font-semibold text-xl'>1. Delivery Details</h2>
@@ -84,7 +133,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       </div>
       <div className="mx-4">
         <Link href={'/checkout'}>
-          <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
+          <button onClick={InitiatePayment} className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
             <IoBagCheck className='m-1' />Pay ₹{subTotal}
           </button>
         </Link>
