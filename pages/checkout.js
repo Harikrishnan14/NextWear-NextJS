@@ -8,30 +8,28 @@ import Script from 'next/script';
 const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
 
   const InitiatePayment = async () => {
-    let txn_token;
-    let amount;
+    let oid = Math.floor(Math.random() * Date.now())
 
     // Get a transaction token
-    const data = { cart, subTotal }
-    let a = await fetch(`${NEXT_PUBLIC_HOST}/api/pretransaction`, {
+    const data = { cart, subTotal, oid, email: "email" }
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data)
     })
-    let b = await a.json()
-    console.log(b);
-    
+    let txn_token = await a.json()
+    console.log(txn_token);
 
     var config = {
       "root": "",
       "flow": "DEFAULT",
       "data": {
-        "orderId": Math.random(), /* update order id */
+        "orderId": oid, /* update order id */
         "token": txn_token, /* update token value */
         "tokenType": "TXN_TOKEN",
-        "amount": amount /* update amount */
+        "amount": subTotal /* update amount */
       },
       "handler": {
         "notifyMerchant": function (eventName, data) {
@@ -54,7 +52,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       <Head>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
-      <Script type='application/javascript' crossOrigin='anonymous' src={`${process.env.PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.PAYTM_MID}.js`} onLoad="onScriptLoad();" />
+      <Script type='application/javascript' crossOrigin='anonymous' src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} />
       <h1 className='font-bold text-3xl my-8 text-center'>Checkout</h1>
 
       <h2 className='font-semibold text-xl'>1. Delivery Details</h2>
