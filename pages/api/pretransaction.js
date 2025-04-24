@@ -55,7 +55,7 @@ export default async function handler(req, res) {
 
                     post_res.on('end', function () {
                         console.log('Response: ', response);
-                        resolve(response)
+                        resolve(JSON.parse(response).body)
                     });
                 });
 

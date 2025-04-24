@@ -19,15 +19,16 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       },
       body: JSON.stringify(data)
     })
-    let txn_token = await a.json()
-    console.log(txn_token);
+    let txnRes = await a.json()
+    console.log(txnRes);
+    let txnToken = txnRes.txnToken
 
     var config = {
       "root": "",
       "flow": "DEFAULT",
       "data": {
         "orderId": oid, /* update order id */
-        "token": txn_token, /* update token value */
+        "token": txnToken, /* update token value */
         "tokenType": "TXN_TOKEN",
         "amount": subTotal /* update amount */
       },
