@@ -20,7 +20,6 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       body: JSON.stringify(data)
     })
     let txnRes = await a.json()
-    console.log(txnRes);
     let txnToken = txnRes.txnToken
 
     var config = {
@@ -44,7 +43,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       // after successfully updating configuration, invoke JS Checkout
       window.Paytm.CheckoutJS.invoke();
     }).catch(function onError(error) {
-      console.log("error => ", error);
+      console.error("error => ", error);
     });
   }
 
