@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import Link from 'next/link';
@@ -6,6 +6,39 @@ import Head from 'next/head';
 import Script from 'next/script';
 
 const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
+  const [phone, setPhone] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [pincode, setPincode] = useState('')
+  const [isDisabled, setIsDisabled] = useState(true)
+
+  const handleChange = (e) => {
+    if (e.target.name === "name") {
+      setName(e.target.value)
+    } else if (e.target.name === "email") {
+      setEmail(e.target.value)
+    } else if (e.target.name === "address") {
+      setAddress(e.target.value)
+    } else if (e.target.name === "phone") {
+      setPhone(e.target.value)
+    } else if (e.target.name === "city") {
+      setCity(e.target.value)
+    } else if (e.target.name === "state") {
+      setState(e.target.value)
+    } else if (e.target.name === "pincode") {
+      setPincode(e.target.value)
+    }
+
+    if (name.length > 3 && email.length > 3 && address.length > 3 && phone.length > 3 && city.length > 3 && state.length > 3 && pincode.length > 3) {
+      setIsDisabled(false)
+    } else {
+      setIsDisabled(true)
+    }
+  }
 
   const InitiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now())
@@ -60,13 +93,13 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="name" className="leading-7 text-sm text-gray-600">Name</label>
-            <input type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input type="text" id="name" name="name" value={name} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-            <input type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input type="email" id="email" name="email" value={email} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
       </div>
@@ -74,7 +107,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       <div className="px-2 w-f">
         <div className="mb-4">
           <label htmlFor="address" className="leading-7 text-sm text-gray-600">Address</label>
-          <textarea id="address" name="address" rows="2" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out resize-none"></textarea>
+          <textarea id="address" name="address" value={address} onChange={handleChange} rows="2" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out resize-none"></textarea>
         </div>
       </div>
 
@@ -82,13 +115,13 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="phone" className="leading-7 text-sm text-gray-600">Phone</label>
-            <input type="phone" id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input type="phone" id="phone" name="phone" value={phone} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="city" className="leading-7 text-sm text-gray-600">City</label>
-            <input type="text" id="city" name="city" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input type="text" id="city" name="city" value={city} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
       </div>
@@ -97,13 +130,13 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="state" className="leading-7 text-sm text-gray-600">State</label>
-            <input type="text" id="state" name="state" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input type="text" id="state" name="state" value={state} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="pincode" className="leading-7 text-sm text-gray-600">Pin Code</label>
-            <input type="email" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input type="email" id="pincode" name="pincode" value={pincode} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
       </div>
@@ -131,7 +164,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       </div>
       <div className="mx-4">
         <Link href={'/checkout'}>
-          <button onClick={InitiatePayment} className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
+          <button onClick={InitiatePayment} disabled={isDisabled} className="flex mr-2 text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
             <IoBagCheck className='m-1' />Pay ₹{subTotal}
           </button>
         </Link>
