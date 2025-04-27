@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { Bounce, toast, ToastContainer } from 'react-toastify'
 
@@ -6,6 +7,8 @@ const Signup = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -34,6 +37,9 @@ const Signup = () => {
       theme: "light",
       transition: Bounce,
     });
+    setTimeout(() => {
+      router.push('/login')
+    }, 1000);
   }
 
   useEffect(() => {
