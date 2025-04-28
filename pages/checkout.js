@@ -44,7 +44,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
     let oid = Math.floor(Math.random() * Date.now())
 
     // Get a transaction token
-    const data = { cart, subTotal, oid, email: "email" }
+    const data = { cart, subTotal, oid, email: email, name, address, pincode, phone }
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
       method: "POST",
       headers: {
