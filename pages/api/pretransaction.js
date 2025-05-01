@@ -5,6 +5,12 @@ import Order from "@/models/Order";
 
 const handler = async (req, res) => {
     if (req.method == 'POST') {
+        // TODO : Check if the cart is tampered with
+
+        // TODO : Check if the cart items are out of stock
+
+        // TODO : Check if the details are valid
+
         // Initiate an order correspponding to this order id
         let order = new Order({
             email: req.body.email,
