@@ -1,6 +1,8 @@
+import Order from '@/models/Order'
+import mongoose from 'mongoose'
 import React from 'react'
 
-const Order = () => {
+const MyOrder = ({ order }) => {
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -53,4 +55,25 @@ const Order = () => {
   )
 }
 
-export default Order
+export async function getServerSideProps(context) {
+  if (!mongoose.connection.readyState) {
+    await mongoose.connect(process.env.MONGO_URI)
+  }
+  let order = await Order.findById(context.query.id)
+  // let colorSizeSlug = {}
+  // for (let item of variants) {
+  //   if (Object.keys(colorSizeSlug).includes(item.color)) {
+  //     colorSizeSlug[item.color][item.size] = { slug: item.slug }
+  //   } else {
+  //     colorSizeSlug[item.color] = {}
+  //     colorSizeSlug[item.color][item.size] = { slug: item.slug }
+  //   }
+  // }
+  return {
+    props: {
+      order: JSON.parse(JSON.stringify(order))
+    }
+  };
+}
+
+export default MyOrder
