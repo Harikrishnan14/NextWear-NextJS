@@ -1,8 +1,26 @@
-import Order from '@/models/Order'
-import React from 'react'
-import mongoose from "mongoose";
+import React, { useEffect } from 'react'
 
 const orders = () => {
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            let a = fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders/`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: localStorage.getItem("token") })
+            })
+            let res = await a.json()
+        }
+
+        if (!localStorage.getItem('token')) {
+            router.push('/')
+        } else {
+            fetchOrders()
+        }
+    }, [])
+
     return (
         <div>
             <div className="container mx-auto">
@@ -50,18 +68,6 @@ const orders = () => {
             </div>
         </div >
     )
-}
-
-export async function getServerSideProps(context) {
-    if (!mongoose.connection.readyState) {
-        await mongoose.connect(process.env.MONGO_URI)
-    }
-    let orders = await Order.find({})
-    return {
-        props: {
-            orders: orders
-        }
-    };
 }
 
 export default orders

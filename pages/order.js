@@ -1,10 +1,16 @@
 import Order from '@/models/Order'
 import mongoose from 'mongoose'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const MyOrder = ({ order }) => {
 
   const products = order.products
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      router.push('/')
+    }
+  }, [])
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
