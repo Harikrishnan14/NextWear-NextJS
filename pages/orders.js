@@ -27,7 +27,7 @@ const orders = () => {
     }, [])
 
     return (
-        <div>
+        <div className='min-h-screen'>
             <div className="container mx-auto">
                 <div className="flex flex-col">
                     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">

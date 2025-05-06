@@ -18,8 +18,10 @@ const MyOrder = ({ order }) => {
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">NEXTWEAR</h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-3">Order ID: #{order.orderId}</h1>
-            <span className="text-sm title-font text-gray-500 tracking-widest">Your order has been successfully placed. Your payment status is: {order.status}</span>
+            <h1 className="text-gray-900 text-xl md:text-3xl title-font font-medium mb-3">Order ID: #{order.orderId}</h1>
+            <span className="text-sm title-font text-gray-500 tracking-widest">Your order has been successfully placed.
+              <p>Your payment status is: <span className='font-semibold text-slate-700'>{order.status}</span></p>
+            </span>
             <div className="overflow-hidden my-5">
               <table
                 className="min-w-full text-left text-sm font-light text-surface dark:text-white">
@@ -48,7 +50,7 @@ const MyOrder = ({ order }) => {
             <h1 className="text-gray-900 text-3xl title-font font-medium my-5">SubTotal: ₹{order.amount}</h1>
             <button className="flex text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded">Track Order</button>
           </div>
-          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400" />
+          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="/order.jpg" />
         </div>
       </div>
     </section>
