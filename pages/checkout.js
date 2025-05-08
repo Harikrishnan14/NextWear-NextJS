@@ -16,7 +16,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
   const [pincode, setPincode] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     if (e.target.name === "name") {
       setName(e.target.value)
     } else if (e.target.name === "email") {
@@ -31,6 +31,20 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       setState(e.target.value)
     } else if (e.target.name === "pincode") {
       setPincode(e.target.value)
+      if (e.target.value.length === 6) {
+        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
+        let pinJson = await pins.json()
+        if (Object.keys(pinJson).includes(e.target.value)) {
+          setCity(pinJson[e.target.value][0])
+          setState(pinJson[e.target.value][1])
+        } else {
+          setCity('')
+          setState('')
+        }
+      } else {
+        setCity('')
+        setState('')
+      }
     }
 
     if (name.length > 3 && email.length > 3 && address.length > 3 && phone.length > 3 && city.length > 3 && state.length > 3 && pincode.length > 3) {
@@ -120,8 +134,8 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         </div>
         <div className="px-2 w-1/2">
           <div className="mb-4">
-            <label htmlFor="city" className="leading-7 text-sm text-gray-600">City</label>
-            <input type="text" id="city" name="city" value={city} readOnly onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <label htmlFor="pincode" className="leading-7 text-sm text-gray-600">Pin Code</label>
+            <input type="email" id="pincode" name="pincode" value={pincode} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
       </div>
@@ -135,8 +149,8 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         </div>
         <div className="px-2 w-1/2">
           <div className="mb-4">
-            <label htmlFor="pincode" className="leading-7 text-sm text-gray-600">Pin Code</label>
-            <input type="email" id="pincode" name="pincode" value={pincode} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <label htmlFor="city" className="leading-7 text-sm text-gray-600">City</label>
+            <input type="text" id="city" name="city" value={city} readOnly onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
           </div>
         </div>
       </div>
