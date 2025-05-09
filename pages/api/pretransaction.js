@@ -88,8 +88,9 @@ const handler = async (req, res) => {
                     });
 
                     post_res.on('end', function () {
-                        response.success = true
-                        resolve(JSON.parse(response).body)
+                        let ress = JSON.parse(response).body
+                        ress.success = true
+                        resolve(ress)
                     });
                 });
 

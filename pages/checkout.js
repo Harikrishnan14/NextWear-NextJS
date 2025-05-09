@@ -4,6 +4,7 @@ import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import Link from 'next/link';
 import Head from 'next/head';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
 
 const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
 
@@ -94,13 +95,35 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         console.error("error => ", error);
       });
     } else {
-      console.error(txnRes.error);
-      
+      toast.error(txnRes.error, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   }
 
   return (
     <div className='container px-2 sm:m-auto'>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <Head>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
