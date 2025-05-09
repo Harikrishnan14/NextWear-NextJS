@@ -67,31 +67,36 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       body: JSON.stringify(data)
     })
     let txnRes = await a.json()
-    let txnToken = txnRes.txnToken
+    if (txnRes.succes) {
+      let txnToken = txnRes.txnToken
 
-    var config = {
-      "root": "",
-      "flow": "DEFAULT",
-      "data": {
-        "orderId": oid, /* update order id */
-        "token": txnToken, /* update token value */
-        "tokenType": "TXN_TOKEN",
-        "amount": subTotal /* update amount */
-      },
-      "handler": {
-        "notifyMerchant": function (eventName, data) {
-          console.log("notifyMerchant handler function called");
-          console.log("eventName => ", eventName);
-          console.log("data => ", data);
+      var config = {
+        "root": "",
+        "flow": "DEFAULT",
+        "data": {
+          "orderId": oid, /* update order id */
+          "token": txnToken, /* update token value */
+          "tokenType": "TXN_TOKEN",
+          "amount": subTotal /* update amount */
+        },
+        "handler": {
+          "notifyMerchant": function (eventName, data) {
+            console.log("notifyMerchant handler function called");
+            console.log("eventName => ", eventName);
+            console.log("data => ", data);
+          }
         }
-      }
-    };
-    window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-      // after successfully updating configuration, invoke JS Checkout
-      window.Paytm.CheckoutJS.invoke();
-    }).catch(function onError(error) {
-      console.error("error => ", error);
-    });
+      };
+      window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+        // after successfully updating configuration, invoke JS Checkout
+        window.Paytm.CheckoutJS.invoke();
+      }).catch(function onError(error) {
+        console.error("error => ", error);
+      });
+    } else {
+      console.error(txnRes.error);
+      
+    }
   }
 
   return (
