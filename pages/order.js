@@ -1,14 +1,19 @@
 import Order from '@/models/Order'
 import mongoose from 'mongoose'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
-const MyOrder = ({ order }) => {
+const MyOrder = ({ order, clearCart }) => {
 
   const products = order.products
+  const router = useRouter()
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       router.push('/')
+    }
+    if (router.query.clearCart === 1) {
+      clearCart()
     }
   }, [])
 
