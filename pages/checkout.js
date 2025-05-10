@@ -95,6 +95,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         console.error("error => ", error);
       });
     } else {
+      clearCart()
       toast.error(txnRes.error, {
         position: "top-left",
         autoClose: 5000,
