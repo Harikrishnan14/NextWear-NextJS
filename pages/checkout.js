@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import Link from 'next/link';
 import Head from 'next/head';
 import Script from 'next/script';
-import { ToastContainer } from 'react-toastify';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
 
@@ -16,6 +16,7 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
   const [state, setState] = useState('')
   const [pincode, setPincode] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
+  const [user, setUser] = useState()
 
   const handleChange = async (e) => {
     if (e.target.name === "name") {
@@ -110,6 +111,14 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
     }
   }
 
+  useEffect(() => {
+    const myUser = JSON.parse(localStorage.getItem('myUser'))
+    if (myUser) {
+      setUser(myUser)
+      setEmail(user?.email)
+    }
+  }, [])
+
   return (
     <div className='container px-2 sm:m-auto'>
       <ToastContainer
@@ -142,7 +151,12 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-            <input type="email" id="email" name="email" value={email} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            {user?.email ? (
+              <input type="email" id="email" name="email" value={user?.email} readOnly className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            ) : (
+              <input type="email" id="email" name="email" value={email} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            )}
+
           </div>
         </div>
       </div>

@@ -21,7 +21,6 @@ const Signup = () => {
       body: JSON.stringify(data)
     })
     let response = await res.json()
-    console.log(response);
 
     setEmail('')
     setName('')
@@ -43,7 +42,7 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('myUser')) {
       router.push('/')
     }
   }, [])

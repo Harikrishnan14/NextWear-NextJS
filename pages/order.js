@@ -9,7 +9,7 @@ const MyOrder = ({ order, clearCart }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('myUser')) {
       router.push('/')
     }
     if (router.query.clearCart === 1) {
