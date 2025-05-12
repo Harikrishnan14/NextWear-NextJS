@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const orders = () => {
     const router = useRouter()
@@ -8,12 +8,12 @@ const orders = () => {
 
     useEffect(() => {
         const fetchOrders = async () => {
-            let a = fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders/`, {
+            let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders/`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ token: localStorage.getItem("myUser") })
+                body: JSON.stringify({ token: JSON.parse(localStorage.getItem("myUser")).token })
             })
             let res = await a.json()
             setOrders(res.orders);
