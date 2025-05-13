@@ -94,13 +94,18 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
                 <div className="font-bold my-2">Subtoal: ₹{subTotal}</div>
                 <div className="flex">
                     <Link href={'/checkout'}>
-                        <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">
+                        <button
+                            className="flex mr-2 text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm"
+                            disabled={Object.keys(cart).length === 0}
+                        >
                             <IoBagCheck className='m-1' />Checkout
                         </button>
                     </Link>
                     <button
-                        className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm text-nowrap"
-                        onClick={clearCart}>
+                        className="flex mr-2 text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm text-nowrap"
+                        onClick={clearCart}
+                        disabled={Object.keys(cart).length === 0}
+                    >
                         Clear Cart
                     </button>
                 </div>
