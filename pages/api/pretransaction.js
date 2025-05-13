@@ -9,6 +9,9 @@ const handler = async (req, res) => {
         // Check if the cart is tampered with
         let product, sumTotal = 0
         let cart = req.body.cart;
+        if (req.body.subTotal <= 0) {
+            res.status(200).json({ success: "false", "error": "Cart empty. Please build your cart and try again!" })
+        }
         for (let item in cart) {
             sumTotal += cart[item].price * cart[item].qty
             product = await Product.findOne({ slug: item })
