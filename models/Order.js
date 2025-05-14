@@ -30,6 +30,11 @@ const OrderSchema = new mongoose.Schema({
         default: "Initiated",
         required: true
     },
+    deliveryStatus: {
+        type: String,
+        default: "unshipped",
+        required: true
+    },
 }, { timestamps: true })
 
 // mongoose.models = {}
