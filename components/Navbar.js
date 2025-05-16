@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdShoppingCart } from "react-icons/md";
 import { IoClose, IoBagCheck } from "react-icons/io5";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
@@ -9,21 +9,29 @@ import { MdAccountCircle } from "react-icons/md";
 const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, logout }) => {
 
     const [dropdown, setDropdown] = useState(false)
+    const [sidebar, setSidebar] = useState(false)
     const ref = useRef()
 
     const toggleCart = () => {
-        if (ref.current.classList.contains('translate-x-full')) {
-            ref.current.classList.remove('translate-x-full')
-            ref.current.classList.add('translate-x-0')
-        }
-        else if (!ref.current.classList.contains('translate-x-full')) {
-            ref.current.classList.remove('translate-x-0')
-            ref.current.classList.add('translate-x-full')
-        }
+        setSidebar(!sidebar)
+        // if (ref.current.classList.contains('translate-x-full')) {
+        //     ref.current.classList.remove('translate-x-full')
+        //     ref.current.classList.add('translate-x-0')
+        // }
+        // else if (!ref.current.classList.contains('translate-x-full')) {
+        //     ref.current.classList.remove('translate-x-0')
+        //     ref.current.classList.add('translate-x-full')
+        // }
     }
 
+    useEffect(() => {
+        if (Object.keys(cart).length !== 0) {
+            setSidebar(true)
+        }
+    }, [])
+
     return (
-        <div className='flex flex-col md:flex-row justify-between md:justify-between items-center px-2 shadow-md sticky top-0 bg-white z-10'>
+        <div className={`flex flex-col md:flex-row justify-between md:justify-between items-center px-2 shadow-md sticky top-0 bg-white z-10 ${!sidebar && `overflow-hidden`}`}>
             <div className="logo mr-auto md:mx-5">
                 <Link href='/'>
                     <Image src='/Logo.png' alt='' height={60} width={60} />
@@ -69,7 +77,7 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
                     <MdShoppingCart className='text-xl md:text-3xl' onClick={toggleCart} />
                 </div>
             </div>
-            <div ref={ref} className={`sideCart absolute top-0 right-0 bg-blue-100 px-8 py-10 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'} w-72 h-[100vh] overflow-y-auto`}>
+            <div ref={ref} className={`sideCart absolute top-0 bg-blue-100 px-8 py-10 transition-all ${sidebar ? 'right-0' : '-right-96'} w-72 h-[100vh] overflow-y-auto`}>
                 <h2 className="font-bold text-xl text-center">Shopping Cart</h2>
                 <span onClick={toggleCart} className="absolute right-3 top-5 text-3xl text-blue-500 cursor-pointer">
                     <IoClose />
