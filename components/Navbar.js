@@ -39,19 +39,22 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
 
     return (
         <>
-            <span>
-                {dropdown && <div className="absolute right-14 top-9 py-2 w-32 bg-white shadow-lg border rounded-md px-5 z-30" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
-                    <ul>
-                        <Link href='/myaccount'>
-                            <li className='py-1 text-sm font-bold hover:text-indigo-700'>My Account</li>
-                        </Link>
-                        <Link href='/orders'>
-                            <li className='py-1 text-sm font-bold hover:text-indigo-700'>Orders</li>
-                        </Link>
-                        <li className='py-1 text-sm font-bold hover:text-indigo-700' onClick={logout}>Logout</li>
-                    </ul>
-                </div>}
-            </span>
+            {!sidebar && (
+                <span className="absolute right-12 top-4 z-30 cursor-pointer" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+                    {dropdown && <div className="absolute right-5 top-5 py-2 w-32 bg-white shadow-lg border rounded-md px-5 z-30">
+                        <ul>
+                            <Link href='/myaccount'>
+                                <li className='py-1 text-sm font-bold hover:text-indigo-700'>My Account</li>
+                            </Link>
+                            <Link href='/orders'>
+                                <li className='py-1 text-sm font-bold hover:text-indigo-700'>Orders</li>
+                            </Link>
+                            <li className='py-1 text-sm font-bold hover:text-indigo-700' onClick={logout}>Logout</li>
+                        </ul>
+                    </div>}
+                    {user.value && <MdAccountCircle className='text-xl md:text-3xl me-3' />}
+                </span>
+            )}
             <div className={`flex flex-col md:flex-row justify-between md:justify-between items-center px-2 shadow-md sticky top-0 bg-white z-10 ${!sidebar && `overflow-hidden`}`}>
                 <div className="logo mr-auto md:mx-5">
                     <Link href='/'>
@@ -81,9 +84,6 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
                                 <button className='bg-indigo-600 px-2 py-1 rounded-md text-sm text-white mx-2'>Login</button>
                             </Link>
                         )}
-                        <span onMouseOver={() => setDropdown(true)}>
-                            {user.value && <MdAccountCircle className='text-xl md:text-3xl me-3' />}
-                        </span>
                         <MdShoppingCart className='text-xl md:text-3xl' onClick={toggleCart} />
                     </div>
                 </div>
