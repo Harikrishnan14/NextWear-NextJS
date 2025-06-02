@@ -1,10 +1,29 @@
 import connectDb from "@/middleware/mongoose";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
+import PaytmChecksum from "paytmchecksum";
 
 const handler = async (req, res) => {
     let order;
-    // TODO : Validate paytm checksum
+
+    // Validate paytm checksum
+    var paytmChecksum = "";
+    var paytmParams = {}
+
+    const received_data = req.body;
+    for (var key in received_data) {
+        if (key == "CHECKSUMHASH") {
+            paytmChecksum = received_data[key]
+        } else {
+            paytmParams[key] = received_data[key]
+        }
+    }
+
+    var isValidChecksum = PaytmChecksum.verifySignature(paytmParams, process.env.PAYTM_MKEY, paytmChecksum)
+    if (!isValidChecksum) {
+        res.status(500).json("Some Error Occured")
+        return
+    }
 
     // Update status into Orders table after checking the transaction status
     if (req.body.STATUS === 'TXN_SUCCESS') {
