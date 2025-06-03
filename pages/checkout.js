@@ -48,12 +48,6 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
         setState('')
       }
     }
-
-    if (name.length > 3 && email.length > 3 && address.length > 3 && phone.length > 3 && city.length > 3 && state.length > 3 && pincode.length > 3) {
-      setIsDisabled(false)
-    } else {
-      setIsDisabled(true)
-    }
   }
 
   const InitiatePayment = async () => {
@@ -110,6 +104,14 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
       });
     }
   }
+
+  useEffect(() => {
+    if (name.length > 3 && email.length > 3 && address.length > 3 && phone.length > 3 && city.length > 3 && state.length > 3 && pincode.length > 3) {
+      setIsDisabled(false)
+    } else {
+      setIsDisabled(true)
+    }
+  }, [name, email, address, phone, city, state, pincode])
 
   useEffect(() => {
     const myUser = JSON.parse(localStorage.getItem('myUser'))
