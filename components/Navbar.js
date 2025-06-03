@@ -40,14 +40,14 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal, lo
     return (
         <>
             {!sidebar && (
-                <span className="absolute right-12 top-4 z-30 cursor-pointer" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+                <span className="fixed right-12 top-4 z-30 cursor-pointer" onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
                     {dropdown && <div className="absolute right-5 top-5 py-2 w-32 bg-white shadow-lg border rounded-md px-5 z-30">
                         <ul>
                             <Link href='/myaccount'>
                                 <li className='py-1 text-sm font-bold hover:text-indigo-700'>My Account</li>
                             </Link>
                             <Link href='/orders'>
-                                <li className='py-1 text-sm font-bold hover:text-indigo-700'>Orders</li>
+                                <li className='py-1 text-sm font-bold hover:text-indigo-700'>My Orders</li>
                             </Link>
                             <li className='py-1 text-sm font-bold hover:text-indigo-700' onClick={logout}>Logout</li>
                         </ul>
