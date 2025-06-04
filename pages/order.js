@@ -1,14 +1,18 @@
 import Order from '@/models/Order'
 import mongoose from 'mongoose'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const MyOrder = ({ order, clearCart }) => {
 
   const products = order.products
   const router = useRouter()
 
+  const [date, setDate] = useState()
+
   useEffect(() => {
+    const d = new Date(order.createdAt)
+    setDate(d)
     if (!localStorage.getItem('myUser')) {
       router.push('/')
     }
@@ -26,6 +30,7 @@ const MyOrder = ({ order, clearCart }) => {
             <h1 className="text-gray-900 text-xl md:text-3xl title-font font-medium mb-3">Order ID: #{order.orderId}</h1>
             <span className="text-sm title-font text-gray-500 tracking-widest">Your order has been successfully placed.
               <p>Your payment status is: <span className='font-semibold text-slate-700'>{order.status}</span></p>
+              <p>Order placed On: <span className='font-semibold text-slate-700'>{date && date.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</span></p>
             </span>
             <div className="overflow-hidden my-5">
               <table
