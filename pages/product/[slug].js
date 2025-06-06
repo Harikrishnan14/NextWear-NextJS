@@ -54,8 +54,8 @@ const Slug = ({ addToCart, buyNow, variants, product }) => {
     }
 
     useEffect(() => {
-      setColor(product.color)
-      setSize(product.size)
+        setColor(product.color)
+        setSize(product.size)
     }, [router.query])
 
     return (
@@ -156,10 +156,17 @@ const Slug = ({ addToCart, buyNow, variants, product }) => {
                                 </div>
                             </div>
                             <div className="flex">
-                                <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
-                                <button className="flex ml-8 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded" onClick={() => buyNow(slug, 1, product.price, product.title, product.size, product.color)}>Buy Now</button>
+                                {product.availableQty > 0 ? <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span> : <span className="title-font font-medium text-2xl text-gray-900">Out of Stock!</span>}
                                 <button
-                                    className="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                                    className="flex ml-8 disabled:bg-indigo-300 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                                    disabled={product.availableQty <= 0}
+                                    onClick={() => buyNow(slug, 1, product.price, product.title, product.size, product.color)}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex ml-4 disabled:bg-indigo-300 text-white bg-indigo-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                                    disabled={product.availableQty <= 0}
                                     onClick={() => {
                                         addToCart(slug, 1, product.price, product.title, product.size, product.color)
                                     }}
