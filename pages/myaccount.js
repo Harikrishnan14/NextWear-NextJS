@@ -16,32 +16,16 @@ const MyAccount = () => {
     const handleChange = async (e) => {
         if (e.target.name === "name") {
             setName(e.target.value)
-        } else if (e.target.name === "email") {
-            setEmail(e.target.value)
         } else if (e.target.name === "address") {
             setAddress(e.target.value)
         } else if (e.target.name === "phone") {
             setPhone(e.target.value)
-        } else if (e.target.name === "city") {
-            setCity(e.target.value)
-        } else if (e.target.name === "state") {
-            setState(e.target.value)
         } else if (e.target.name === "pincode") {
             setPincode(e.target.value)
-            if (e.target.value.length === 6) {
-                let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
-                let pinJson = await pins.json()
-                if (Object.keys(pinJson).includes(e.target.value)) {
-                    setCity(pinJson[e.target.value][0])
-                    setState(pinJson[e.target.value][1])
-                } else {
-                    setCity('')
-                    setState('')
-                }
-            } else {
-                setCity('')
-                setState('')
-            }
+        } else if (e.target.name === "password") {
+            setPassword(e.target.value)
+        } else if (e.target.name === "cpassword") {
+            setCPassword(e.target.value)
         }
     }
 
@@ -109,13 +93,13 @@ const MyAccount = () => {
                 <div className="px-2 w-1/2">
                     <div className="mb-4">
                         <label htmlFor="password" className="leading-7 text-sm text-gray-600">New Password</label>
-                        <input type="text" id="password" name="password" value={password} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <input type="password" id="password" name="password" value={password} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                 </div>
                 <div className="px-2 w-1/2">
                     <div className="mb-4">
                         <label htmlFor="cpassword" className="leading-7 text-sm text-gray-600">Confirm Password</label>
-                        <input type="text" id="cpassword" name="cpassword" value={cPassword} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <input type="password" id="cpassword" name="cpassword" value={cPassword} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                 </div>
             </div>
