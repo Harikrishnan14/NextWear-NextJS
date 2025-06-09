@@ -29,6 +29,18 @@ const MyAccount = () => {
         }
     }
 
+    const handleUserSubmit = async () => {
+        let data = { token: user.token }
+        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        let txnRes = await a.json()
+    }
+
     useEffect(() => {
         const myUser = JSON.parse(localStorage.getItem('myUser'))
         if (!myUser) {
@@ -86,7 +98,7 @@ const MyAccount = () => {
                     </div>
                 </div>
             </div>
-            <button className="m-2 flex mb-5 text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">Submit</button>
+            <button onClick={handleUserSubmit} className="m-2 flex mb-5 text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">Submit</button>
 
             <h2 className='font-semibold text-xl'>2. Change Password</h2>
             <div className='mx-auto flex my-2'>
