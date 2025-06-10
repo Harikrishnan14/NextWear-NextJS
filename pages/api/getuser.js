@@ -6,8 +6,8 @@ const handler = async (req, res) => {
     if (req.method == 'POST') {
         let token = req.body.token
         let user = jwt.verify(token, process.env.JWT_SECRET)
-        // let user = await User.find({ email: req.body.email })
-        res.status(200).json({ user });
+        let dbuser = await User.findOne({ email: user.email })
+        res.status(200).json({ user: dbuser });
     } else {
         res.status(400).json({ error: "error" });
     }
