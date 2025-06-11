@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { Bounce, ToastContainer } from 'react-toastify';
 
 const MyAccount = () => {
     const [name, setName] = useState('')
@@ -55,6 +56,17 @@ const MyAccount = () => {
             body: JSON.stringify(data)
         })
         let res = await a.json()
+        toast.success("Successfully Updated", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
     }
 
     useEffect(() => {
@@ -71,6 +83,19 @@ const MyAccount = () => {
 
     return (
         <div className='container mx-auto my-9'>
+            <ToastContainer
+                position="top-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <h1 className='text-3xl text-center font-bold'>Update your Account</h1>
 
             <h2 className='font-semibold text-xl'>1. Delivery Details</h2>
