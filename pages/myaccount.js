@@ -29,8 +29,8 @@ const MyAccount = () => {
         }
     }
 
-    const handleUserSubmit = async () => {
-        let data = { token: user.token }
+    const fetchData = async (token) => {
+        let data = { token: token }
         let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
             method: "POST",
             headers: {
@@ -38,7 +38,23 @@ const MyAccount = () => {
             },
             body: JSON.stringify(data)
         })
-        let txnRes = await a.json()
+        let res = await a.json()
+        setName(res.name)
+        setAddress(res.address)
+        setPincode(res.pincode)
+        setPhone(res.phone)
+    }
+
+    const handleUserSubmit = async () => {
+        let data = { token: user.token, name, address, phone, pincode }
+        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updateuser`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        let res = await a.json()
     }
 
     useEffect(() => {
@@ -48,7 +64,8 @@ const MyAccount = () => {
         }
         if (myUser) {
             setUser(myUser)
-            setEmail(user?.email)
+            setEmail(myUser?.email)
+            fetchData(myUser.token)
         }
     }, [])
 

@@ -33,6 +33,14 @@ const OrderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    phone: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         default: "Initiated",
