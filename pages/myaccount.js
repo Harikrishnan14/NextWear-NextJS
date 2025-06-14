@@ -10,6 +10,7 @@ const MyAccount = () => {
     const [pincode, setPincode] = useState('')
     const [password, setPassword] = useState('')
     const [cPassword, setCPassword] = useState('')
+    const [nPassword, setNPassword] = useState('')
     const [user, setUser] = useState()
 
     const router = useRouter()
@@ -27,6 +28,8 @@ const MyAccount = () => {
             setPassword(e.target.value)
         } else if (e.target.name === "cpassword") {
             setCPassword(e.target.value)
+        } else if (e.target.name === "npassword") {
+            setNPassword(e.target.value)
         }
     }
 
@@ -56,17 +59,73 @@ const MyAccount = () => {
             body: JSON.stringify(data)
         })
         let res = await a.json()
-        toast.success("Successfully Updated", {
-            position: "top-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
+        if (res.success) {
+            toast.success("Details Successfully Updated", {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+    }
+
+    const handlePassSubmit = async () => {
+        if (nPassword == cPassword) {
+            let data = { token: user.token, password, cPassword, nPassword }
+            let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updateuser`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            let res = await a.json()
+            if (res.success) {
+                toast.success("Password Successfully Updated", {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            } else {
+                toast.error("Oops, something went wrong!", {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            }
+        } else {
+            toast.error("New password and Confirm password must be the same", {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+        setPassword('')
+        setCPassword('')
+        setNPassword('')
     }
 
     useEffect(() => {
@@ -146,18 +205,24 @@ const MyAccount = () => {
             <div className='mx-auto flex my-2'>
                 <div className="px-2 w-1/2">
                     <div className="mb-4">
-                        <label htmlFor="password" className="leading-7 text-sm text-gray-600">New Password</label>
+                        <label htmlFor="password" className="leading-7 text-sm text-gray-600">Password</label>
                         <input type="password" id="password" name="password" value={password} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                 </div>
                 <div className="px-2 w-1/2">
                     <div className="mb-4">
-                        <label htmlFor="cpassword" className="leading-7 text-sm text-gray-600">Confirm Password</label>
+                        <label htmlFor="npassword" className="leading-7 text-sm text-gray-600">New Password</label>
+                        <input type="password" id="npassword" name="npassword" value={nPassword} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    </div>
+                </div>
+                <div className="px-2 w-1/2">
+                    <div className="mb-4">
+                        <label htmlFor="cpassword" className="leading-7 text-sm text-gray-600">Confirm New Password</label>
                         <input type="password" id="cpassword" name="cpassword" value={cPassword} onChange={handleChange} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                 </div>
             </div>
-            <button className="m-2 flex text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm">Submit</button>
+            <button className="m-2 flex text-white bg-indigo-500 disabled:bg-indigo-300 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded text-sm" onClick={handlePassSubmit}>Submit</button>
 
         </div>
     )
