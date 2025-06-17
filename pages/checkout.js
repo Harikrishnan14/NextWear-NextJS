@@ -18,6 +18,18 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
   const [isDisabled, setIsDisabled] = useState(true)
   const [user, setUser] = useState()
 
+  const getPincode = async (pin) => {
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
+    let pinJson = await pins.json()
+    if (Object.keys(pinJson).includes(pin)) {
+      setCity(pinJson[pin][0])
+      setState(pinJson[pin][1])
+    } else {
+      setCity('')
+      setState('')
+    }
+  }
+
   const handleChange = async (e) => {
     if (e.target.name === "name") {
       setName(e.target.value)
@@ -34,20 +46,29 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
     } else if (e.target.name === "pincode") {
       setPincode(e.target.value)
       if (e.target.value.length === 6) {
-        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
-        let pinJson = await pins.json()
-        if (Object.keys(pinJson).includes(e.target.value)) {
-          setCity(pinJson[e.target.value][0])
-          setState(pinJson[e.target.value][1])
-        } else {
-          setCity('')
-          setState('')
-        }
+        getPincode(e.target.value)
       } else {
         setCity('')
         setState('')
       }
     }
+  }
+
+  const fetchData = async (token) => {
+    let data = { token: token }
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    let res = await a.json()
+    setName(res.name)
+    setAddress(res.address)
+    setPincode(res.pincode)
+    setPhone(res.phone)
+    getPincode(res.pincode)
   }
 
   const InitiatePayment = async () => {
@@ -117,7 +138,8 @@ const Checkout = ({ cart, clearCart, addToCart, removeFromCart, subTotal }) => {
     const myUser = JSON.parse(localStorage.getItem('myUser'))
     if (myUser) {
       setUser(myUser)
-      setEmail(user?.email)
+      setEmail(myUser?.email)
+      fetchData(myUser.token)
     }
   }, [])
 
