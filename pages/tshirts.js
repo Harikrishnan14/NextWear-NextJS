@@ -13,6 +13,7 @@ const Tshirts = ({ products }) => {
             </Head>
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-wrap -m-4 justify-center">
+                    {Object.keys(products).length === 0 && <p>Sorry all the Tshirts are out of stock. New stock coming soon. Stay Tuned!</p>}
                     {Object.keys(products)?.map((item, index) => (
                         <Link passHref={true} href={`/product/${products[item]?.slug}`} className="lg:w-1/4 md:w-1/2 p-4 w-full cursor-pointer shadow-lg mb-8" key={index}>
                             <div>
