@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { Bounce, ToastContainer } from 'react-toastify';
@@ -155,6 +156,10 @@ const MyAccount = () => {
                 theme="light"
                 transition={Bounce}
             />
+            <Head>
+                <title>My Account - NextWear.com</title>
+                <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+            </Head>
             <h1 className='text-3xl text-center font-bold'>Update your Account</h1>
 
             <h2 className='font-semibold text-xl'>1. Delivery Details</h2>
