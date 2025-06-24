@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FullLayout from "../../src/layouts/FullLayout";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../src/theme/theme";
@@ -18,6 +18,18 @@ import {
 import BaseCard from "../../src/components/baseCard/BaseCard";
 
 const Add = () => {
+
+    const [form, setForm] = useState({})
+    const onChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <style jsx global>{`
@@ -30,91 +42,24 @@ const Add = () => {
                     <Grid item xs={12} lg={12}>
                         <BaseCard title="Add a Product">
                             <Stack spacing={3}>
+                                <TextField name="title" value={form.title ? form.title : ""} onChange={onChange} label="Title" variant="outlined" />
+                                <TextField name="type" value={form.type ? form.type : ""} onChange={onChange} label="Type" variant="outlined" />
+                                <TextField name="size" value={form.size ? form.size : ""} onChange={onChange} label="Size" variant="outlined" />
+                                <TextField name="color" value={form.color ? form.color : ""} onChange={onChange} label="Color" variant="outlined" />
+                                <TextField name="slug" value={form.slug ? form.slug : ""} onChange={onChange} label="Slug" variant="outlined" />
                                 <TextField
-                                    id="name-basic"
-                                    label="Name"
-                                    variant="outlined"
-                                    defaultValue="Nirav Joshi"
-                                />
-                                <TextField id="email-basic" label="Email" variant="outlined" />
-                                <TextField
-                                    id="pass-basic"
-                                    label="Password"
-                                    type="password"
-                                    variant="outlined"
-                                />
-                                <TextField
-                                    id="outlined-multiline-static"
-                                    label="Text Area"
+                                    name="description"
+                                    label="Description"
                                     multiline
                                     rows={4}
-                                    defaultValue="Default Value"
+                                    value={form.description ? form.description : ""}
+                                    onChange={onChange}
                                 />
-                                <TextField
-                                    error
-                                    id="er-basic"
-                                    label="Error"
-                                    defaultValue="ad1avi"
-                                    variant="outlined"
-                                />
-                                <FormGroup>
-                                    <FormControlLabel
-                                        control={<Checkbox defaultChecked />}
-                                        label="Terms & Condition"
-                                    />
-                                    <FormControlLabel
-                                        disabled
-                                        control={<Checkbox />}
-                                        label="Disabled"
-                                    />
-                                </FormGroup>
-                                <FormControl>
-                                    <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                                    <RadioGroup
-                                        aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="female"
-                                        name="radio-buttons-group"
-                                    >
-                                        <FormControlLabel
-                                            value="female"
-                                            control={<Radio />}
-                                            label="Female"
-                                        />
-                                        <FormControlLabel
-                                            value="male"
-                                            control={<Radio />}
-                                            label="Male"
-                                        />
-                                        <FormControlLabel
-                                            value="other"
-                                            control={<Radio />}
-                                            label="Other"
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
                             </Stack>
                             <br />
-                            <Button variant="contained" mt={2}>
+                            <Button variant="contained" mt={2} onClick={handleSubmit}>
                                 Submit
                             </Button>
-                        </BaseCard>
-                    </Grid>
-
-                    <Grid item xs={12} lg={12}>
-                        <BaseCard title="Form Design Type">
-                            <Stack spacing={3} direction="row">
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Outlined"
-                                    variant="outlined"
-                                />
-                                <TextField id="filled-basic" label="Filled" variant="filled" />
-                                <TextField
-                                    id="standard-basic"
-                                    label="Standard"
-                                    variant="standard"
-                                />
-                            </Stack>
                         </BaseCard>
                     </Grid>
                 </Grid>
