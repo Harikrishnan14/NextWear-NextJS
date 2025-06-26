@@ -11,48 +11,9 @@ import {
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 
-const products = [
-  {
-    id: "1",
-    name: "Sunil Joshi",
-    post: "Web Designer",
-    pname: "Elite Admin",
-    priority: "Low",
-    pbg: "primary.main",
-    budget: "3.9",
-  },
-  {
-    id: "2",
-    name: "Andrew McDownland",
-    post: "Project Manager",
-    pname: "Real Homes WP Theme",
-    priority: "Medium",
-    pbg: "secondary.main",
-    budget: "24.5",
-  },
-  {
-    id: "3",
-    name: "Christopher Jamil",
-    post: "Project Manager",
-    pname: "MedicalPro WP Theme",
-    priority: "High",
-    pbg: "error.main",
-    budget: "12.8",
-  },
-  {
-    id: "4",
-    name: "Nirav Joshi",
-    post: "Frontend Engineer",
-    pname: "Hosting Press HTML",
-    priority: "Critical",
-    pbg: "success.main",
-    budget: "2.4",
-  },
-];
-
-const ProductPerfomance = () => {
+const ProductPerfomance = ({ products }) => {
   return (
-    <BaseCard title="Product Perfomance">
+    <BaseCard title="All Products">
       <Table
         aria-label="simple table"
         sx={{
@@ -64,33 +25,33 @@ const ProductPerfomance = () => {
           <TableRow>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                Id
+                Title
               </Typography>
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                Assigned
+                Slug
               </Typography>
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                Name
+                Image
               </Typography>
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                Priority
+                Size/Color
               </Typography>
             </TableCell>
             <TableCell align="right">
               <Typography color="textSecondary" variant="h6">
-                Budget
+                Price
               </Typography>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
+          {products?.map((product) => (
             <TableRow key={product.name}>
               <TableCell>
                 <Typography
@@ -99,7 +60,7 @@ const ProductPerfomance = () => {
                     fontWeight: "500",
                   }}
                 >
-                  {product.id}
+                  {product.title}
                 </Typography>
               </TableCell>
               <TableCell>
@@ -116,7 +77,7 @@ const ProductPerfomance = () => {
                         fontWeight: "600",
                       }}
                     >
-                      {product.name}
+                      {product.slug}
                     </Typography>
                     <Typography
                       color="textSecondary"
@@ -131,23 +92,24 @@ const ProductPerfomance = () => {
               </TableCell>
               <TableCell>
                 <Typography color="textSecondary" variant="h6">
-                  {product.pname}
+                  {/* <Chip
+                    sx={{
+                      pl: "4px",
+                      pr: "4px",
+                      backgroundColor: product.pbg,
+                      color: "#fff",
+                    }}
+                    size="small"
+                    label={product.priority}
+                  ></Chip> */}
+                  <img src={product.img} alt="" style={{ height: "35px" }} />
                 </Typography>
               </TableCell>
               <TableCell>
-                <Chip
-                  sx={{
-                    pl: "4px",
-                    pr: "4px",
-                    backgroundColor: product.pbg,
-                    color: "#fff",
-                  }}
-                  size="small"
-                  label={product.priority}
-                ></Chip>
+                {product.size} / {product.color.charAt(0).toUpperCase() + product.color.slice(1)}
               </TableCell>
               <TableCell align="right">
-                <Typography variant="h6">${product.budget}k</Typography>
+                <Typography variant="h6">₹{product.price}</Typography>
               </TableCell>
             </TableRow>
           ))}
