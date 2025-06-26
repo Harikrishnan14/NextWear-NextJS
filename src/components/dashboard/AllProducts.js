@@ -92,16 +92,6 @@ const ProductPerfomance = ({ products }) => {
               </TableCell>
               <TableCell>
                 <Typography color="textSecondary" variant="h6">
-                  {/* <Chip
-                    sx={{
-                      pl: "4px",
-                      pr: "4px",
-                      backgroundColor: product.pbg,
-                      color: "#fff",
-                    }}
-                    size="small"
-                    label={product.priority}
-                  ></Chip> */}
                   <img src={product.img} alt="" style={{ height: "35px" }} />
                 </Typography>
               </TableCell>
