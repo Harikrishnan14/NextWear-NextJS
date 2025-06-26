@@ -1,40 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Initial Setup:
 
-## Getting Started
+1. **Install Node.js :** Node.js is an open-source, cross-platform JavaScript runtime environment. You can download Node.js from the official website at https://nodejs.org/en/download/ or use your system's package manager.
 
-First, run the development server:
+   Check Node.js and npm Installation :
+   Open a terminal (or command prompt on Windows) and run the following command to ensure Node.js is installed correctly :
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ![Image](https://github.com/user-attachments/assets/5b6a1362-a3a7-4997-a2ef-9d83be414541)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   [ NOTE : npm comes with Node.js by default, you don't have to install it separately ]
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+2. **Install MongoDB :** MongoDB is a source-available, cross-platform, document-oriented database program. Classified as a NoSQL database product, MongoDB utilizes JSON-like documents with optional schemas. You can download MongoDB from the official website at https://www.mongodb.com/try/download/community
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+   Inorder to run MongoDB locally you need to have MongoDB Shell installed on your computer. You can download MongoDB Shell from the official website at https://www.mongodb.com/try/download/shell
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   Check MongoDB Installation :
+   Open a terminal (or command prompt on Windows) and run the following command to ensure MongoDB is installed correctly :
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ![image](https://github.com/Harikrishnan14/SocialMediaApp-MERN/assets/105783562/03a82297-eafa-4940-ba82-7f0fdd7e4b03)
 
-## Learn More
+3. **Install MongoDB Compass :** You can download MongoDB Compass from the official website at https://www.mongodb.com/try/download/compass
 
-To learn more about Next.js, take a look at the following resources:
+4. **Create PayTM Merchant account and get the keys :** You can create a PayTM Merchant account by going to the official developer docs at https://www.paytmpayments.com/docs/jscheckout-initiate-payment?ref=jsCheckoutdoc
+ 
+5. **Create necessary folders, files and fill in the details :**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   1. Navigate to root of the project folder, and create a file named `.env.local`
+   2. Inside the .env.local file fill in your details such as `MONGO_URI, NEXT_PUBLIC_HOST, NEXT_PUBLIC_PAYTM_HOST, NEXT_PUBLIC_PAYTM_MID, PAYTM_MKEY, AES_SECRET, JWT_SECRET`. Your .env.local file will look like this :
+      
+      ![Image](https://github.com/user-attachments/assets/827b56a0-a0b9-4c38-ab03-3c7affffb515)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+6. **Install Dependencies :**
+   1. Open the terminal (or command prompt on Windows) (or if you are using VS Code, you can use its terminal) from the root folder and run the following command to install all the dependencies needed to run the application :
+      ### `npm i`
 
-## Deploy on Vercel
+# Starting the Application:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. In the terminal which you used to install the dependencies for the app, run the following command to start the application :
+   ### `npm run dev`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. After these, Go to 'http://localhost:3000'
+
+
+# Packages Used:
+
+1. **@mui/material + @emotion :** Provides pre-built, responsive UI components based on Material Design. Emotion is used for writing CSS styles with JavaScript to style MUI components.
+2. **ApexCharts & react-apexcharts :** Used for rendering interactive charts like bar, line, and pie charts in React applications.
+3. **react-icons & feather-icons-react :** Offers a wide range of SVG icons (including Feather icons) that can be easily embedded into your React components.
+4. **react-toastify :** Allows displaying customizable toast notifications to improve user feedback and UI interactivity.
+5. **react-top-loading-bar :** Displays a smooth loading bar at the top of the page during data fetching or route changes, improving UX.
+6. **jsonwebtoken :** Helps in generating and verifying JWTs (JSON Web Tokens), commonly used for authentication.
+7. **mongoose :** A MongoDB object modeling tool designed to work in an asynchronous environment, providing schema-based solutions.
+8. **paytmchecksum :** Used to generate and validate checksums for secure integration with Paytm's payment gateway.
+9. **clsx :** Utility for constructing className strings conditionally and concisely.
